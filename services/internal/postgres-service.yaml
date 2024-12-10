@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db # needs to be name "db" because that is how it is name by default in the backend code
+  labels:
+    name: postgres-service
+    app: demo-voting-app
+spec:
+  # by default the type of a service is = ClusterIP
+  ports:
+    - port: 5432 # same as the containerport in the postgres pod 
+      targetPort: 5432
+  selector:
+    # this part is the same as the part under the labels section in the postgres pod definition file.
+    name: postgres-pod
+    app: demo-voting-app
